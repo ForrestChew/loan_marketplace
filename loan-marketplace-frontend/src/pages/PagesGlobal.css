@@ -1,0 +1,35 @@
+.page-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.market-item-container {
+  border: 1px solid gray;
+  color: white;
+  width: 50%;
+  transition: border ease-in-out 0.3s;
+}
+
+.market-item-container:hover {
+  border: 1px solid whitesmoke;
+}
+
+.market-items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.heading {
+  text-align: center;
+}
+
+@media screen and (max-width: 850px) {
+  .page-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .market-item-container {
+    width: 100%;
+  }
+}

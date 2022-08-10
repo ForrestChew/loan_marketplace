@@ -1,0 +1,84 @@
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 8vh;
+  border-bottom: 2px solid black;
+  background-color: rgb(134, 183, 64);
+}
+
+.logo-area {
+  display: flex;
+  color: white;
+  flex-direction: row;
+}
+
+.logo-area h4 {
+  margin-left: 7px;
+  font-size: 22px;
+  letter-spacing: 0.25rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navlinks {
+  display: flex;
+  justify-content: space-around;
+  /* gap: 4%; */
+  /* margin-right: 8%; */
+  align-items: center;
+  width: 50%;
+  font-size: large;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+.link-active {
+  color: white;
+  padding-bottom: 5%;
+  border-bottom: 1px solid white;
+}
+
+.hamburger-toggle {
+  cursor: pointer;
+  display: none;
+}
+
+@media screen and (max-width: 850px) {
+  .logo-area {
+    margin-left: 2rem;
+  }
+
+  .hamburger-toggle {
+    display: block;
+  }
+
+  .navlinks {
+    flex-direction: column;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 5.4rem;
+    height: 100%;
+    width: 100%;
+    font-size: 28px;
+    display: none;
+    background-color: gray;
+    margin-right: none;
+  }
+
+  .active {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 850px) {
+  .navlinks {
+    margin-right: 6%;
+    gap: 5%;
+  }
+}

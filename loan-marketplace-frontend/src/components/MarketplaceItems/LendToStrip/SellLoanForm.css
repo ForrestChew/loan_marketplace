@@ -1,0 +1,8 @@
+.resell-form {
+  display: flex;
+}
+
+.input-box {
+  width: 50%;
+  height: 2rem;
+}

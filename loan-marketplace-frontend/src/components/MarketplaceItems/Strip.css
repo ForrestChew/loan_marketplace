@@ -1,0 +1,56 @@
+.strip-container {
+  border: 1px solid black;
+  color: white;
+  width: 28rem;
+  min-width: 20%;
+  margin: 1%;
+  background-color: black;
+  border: 1px solid #edad1d;
+  transition: all ease-in-out 0.5s;
+}
+
+.strip-container:hover {
+  color: white;
+  background-color: rgb(14, 14, 14);
+  box-shadow: 2px 2px #edad1d;
+  border: 1px solid #edad1d;
+}
+
+table {
+  min-width: 100%;
+  border: 1px solid black;
+}
+
+td {
+  word-break: break-all;
+  text-align: center;
+}
+
+td,
+th {
+  border: 1px solid black;
+}
+
+.strip-btn {
+  width: 100%;
+  color: white;
+  background-color: rgb(0, 0, 0, 0.1);
+  border: 1px solid black;
+  font-size: large;
+  padding: 0.5rem 1rem;
+  letter-spacing: 1.15px;
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+}
+
+.strip-btn:hover {
+  background-color: #05386b;
+  border-radius: 6px 6px 6px 6px;
+  border: 1px solid white;
+}
+
+@media screen and (max-width: 1870px) {
+  .strip-container {
+    width: 100%;
+  }
+}

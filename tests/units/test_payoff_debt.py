@@ -5,7 +5,7 @@ from brownie import accounts
 def test_payoff_debt_incorrect_amount(contract, payoff_debt_setup):
     borrower = accounts[1]
     incorrect_debt_amount = 1
-    proposal_id = contract.getLoanProposals()[0][1]
+    proposal_id = contract.getMarketItemIds()[0]
     with brownie.reverts("payoffDebt: Incorrect Amount"):
         contract.payoffDebt(
             proposal_id, {"from": borrower, "value": incorrect_debt_amount})

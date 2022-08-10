@@ -7,37 +7,30 @@ w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
 
 def test_lending_without_sending_funds(contract, propose_loan):
     lender = accounts[2]
-    loan_proposal_id = contract.getLoanProposals()[0][1]
-    with brownie.reverts("lend: Incorrect Amount"):
-        contract.lend(loan_proposal_id, {"from": lender})
+    non_existant_proposal_id = 1
+    with brownie.reverts("lend: Non-existant proposal"):
+        contract.lend(non_existant_proposal_id, {"from": lender})
 
 
 def test_lend_proposal_time_start(contract, lend):
-    proposal_time_start = contract.getLoanProposals()[0][5]
+    proposal_id = contract.getMarketItemIds()[0]
+    print(contract.getMarketplaceItems)
+    proposal_time_start = contract.getMarketplaceItems(proposal_id)[5]
     assert proposal_time_start > 1
 
 
 def test_lend_proposal_new_lender_percent_of_loan(contract, lend):
     lender = accounts[2]
-    proposal_id = contract.getLoanProposals()[0][1]
-    lenders_percent_amount = contract.lenderPercentAmounts(lender, proposal_id)
+    proposal_id = proposal_id = contract.getMarketItemIds()[0]
+    lenders_percent_amount = contract.getMarketplaceItems(proposal_id)[8][0]
     assert lenders_percent_amount == 100
 
 
 def test_lend_proposal_new_lender_assigned_to_loan(contract, lend):
     lender = accounts[2]
-    lenders_assigned_to_loan = contract.getLoanProposals()[0][7]
-    assert lenders_assigned_to_loan[0] == lender
-
-
-def test_lend_is_proposed(contract, lend):
-    is_proposed = contract.getLoanProposals()[0][9]
-    assert is_proposed == False
-
-
-def test_lend_is_active(contract, lend):
-    is_active = contract.getLoanProposals()[0][10]
-    assert is_active == True
+    proposal_id = contract.getMarketItemIds()[0]    
+    lenders_assigned_to_loan = contract.getMarketplaceItems(proposal_id)[7][0]
+    assert lenders_assigned_to_loan == lender
 
 
 def test_lend_loan_made_to_proposer(lend):

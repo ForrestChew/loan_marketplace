@@ -28,7 +28,7 @@ def test_proposing_a_loan_without_paying_fee(contract):
 
 
 def test_proposing_a_loan(contract, propose_loan):
-    assert contract.getLoanProposals()
+    assert contract.getMarketItemIds()
 
 
 def test_listing_fee_payment(contract, propose_loan):
@@ -37,42 +37,33 @@ def test_listing_fee_payment(contract, propose_loan):
 
 def test_proposal_amount(contract, propose_loan):
     loan_amount = 1
-    assert contract.getLoanProposals()[0][2] == loan_amount
+    proposal_id =  contract.getMarketItemIds()[0]
+    assert contract.getMarketplaceItems(proposal_id)[2] == loan_amount
 
 
 def test_proposal_interest_rate(contract, propose_loan):
     interest_rate = 2
-    assert contract.getLoanProposals()[0][3] == interest_rate
+    proposal_id =  contract.getMarketItemIds()[0]
+    assert contract.getMarketplaceItems(proposal_id)[3] == interest_rate
 
 
 def test_proposal_duration(contract, propose_loan):
-    loan_duration = 3
-    assert contract.getLoanProposals()[0][4] == loan_duration
+    loan_duration = 3 * 86400
+    proposal_id = contract.getMarketItemIds()[0]
+    print(contract.getMarketplaceItems(proposal_id))
+    assert contract.getMarketplaceItems(proposal_id)[4] == loan_duration
 
 
 def test_proposal_start_time(contract, propose_loan):
     start_time = 0
-    assert contract.getLoanProposals()[0][5] == start_time
+    proposal_id =  contract.getMarketItemIds()[0]
+    assert contract.getMarketplaceItems(proposal_id)[5] == start_time
 
 
 def test_proposal_borrower(contract, propose_loan):
     borrower = accounts[1]
-    assert contract.getLoanProposals()[0][6] == borrower
-
-
-def test_proposal_is_proposed(contract, propose_loan):
-    is_proposed = True
-    assert contract.getLoanProposals()[0][9] == is_proposed
-
-
-def test_proposal_is_active(contract, propose_loan):
-    is_active = False
-    assert contract.getLoanProposals()[0][10] == is_active
-
-
-def test_proposal_is_for_sale(contract, propose_loan):
-    is_for_sale = False
-    assert contract.getLoanProposals()[0][11] == is_for_sale
+    proposal_id = contract.getMarketItemIds()[0]
+    assert contract.getMarketplaceItems(proposal_id)[6] == borrower
 
 
 def test_emitted_proposal_event(propose_loan):

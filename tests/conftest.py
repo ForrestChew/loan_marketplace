@@ -25,11 +25,10 @@ def propose_loan(contract):
 @pytest.fixture
 def lend(contract, propose_loan):
     lender = accounts[2]
-    propose_loan
-    loan_proposal_id = contract.getLoanProposals()[0][1]
-    loan_amount = contract.getLoanProposals()[0][2]
+    proposal_id = contract.getMarketItemIds()[0]
+    loan_amount = contract.getMarketplaceItems(proposal_id)[2]
     lend_tx = contract.lend(
-        loan_proposal_id, {"from": lender, "value": loan_amount})
+        proposal_id, {"from": lender, "value": loan_amount})
     return lend_tx
 
 
@@ -42,7 +41,7 @@ def payoff_debt_setup(contract):
     interest_rate = 5
     contract.proposeLoan(loan_amount, interest_rate, 20, {
                          "from": borrower, "value": listingFee})
-    proposal_id = contract.getLoanProposals()[0][1]
+    proposal_id = contract.getMarketItemIds()[0]
     lend_tx = contract.lend(proposal_id, {"from": lender, "value": 10000})
     return lend_tx
 
@@ -50,8 +49,8 @@ def payoff_debt_setup(contract):
 @pytest.fixture
 def sell_loan_fraction(contract, payoff_debt_setup):
     lender = accounts[2]
-    loan_id = contract.getLoanProposals()[0][1]
-    sell_loan_fract_tx = contract.sellLoanFraction(
+    loan_id = contract.getMarketItemIds()[0]
+    sell_loan_fract_tx = contract.proposeLoanFraction(
         loan_id, 1, 50, {"from": lender})
     return sell_loan_fract_tx
 
@@ -63,7 +62,7 @@ def payoff_debt(contract, payoff_debt_setup):
     interest_rate = 5
     interest_amount = (loan_amount * (interest_rate * 100)) / 10000
     total_debt = loan_amount + interest_amount
-    proposal_id = contract.getLoanProposals()[0][1]
+    proposal_id = contract.getMarketItemIds()[0]
     payoff_debt_tx = contract.payoffDebt(
         proposal_id, {"from": borrower, "value": total_debt})
     return payoff_debt_tx

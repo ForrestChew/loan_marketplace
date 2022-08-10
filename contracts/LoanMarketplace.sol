@@ -88,6 +88,10 @@ contract LoanMarketplace is LoanFactory {
      */
     function lend(uint256 _proposalId) external payable isBlacklistedCheck {
         require(
+            itemIdToItem[_proposalId].id > 0,
+            "lend: Non-existant proposal"
+        );
+        require(
             msg.value == itemIdToItem[_proposalId].loanAmount,
             "lend: Incorrect Amount"
         );
@@ -113,7 +117,7 @@ contract LoanMarketplace is LoanFactory {
         );
         require(
             _percentage <= itemIdToItem[_loanId].percentOwned[msg.sender],
-            "sellLoanFraction: Cant sell more than owned"
+            "proposeLoanFraction: Cant sell more than owned"
         );
         createFractSale(_loanId, _price, _percentage);
         emit NewLoanFraction(_loanId, _percentage, _price);

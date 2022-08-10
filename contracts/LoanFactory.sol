@@ -58,10 +58,6 @@ contract LoanFactory {
      * @param _proposalId - The ID of the proposal to lend on.
      */
     function updateProposalOnLend(uint256 _proposalId) internal {
-        require(
-            itemIdToItem[_proposalId].id > 0,
-            "lend: Non-existant proposal"
-        );
         itemIdToItem[_proposalId].loanStartTime = block.timestamp;
         itemIdToItem[_proposalId].lenders.push(msg.sender);
         itemIdToItem[_proposalId].percentOwned[msg.sender] = 100;

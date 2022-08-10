@@ -4,38 +4,31 @@ from brownie import accounts
 
 def test_list_loan_fraction_more_than_owned(contract, lend):
     lender = accounts[2]
-    loan_id = contract.getLoanProposals()[0][1]
-    with brownie.reverts("sellLoanFraction: Cant sell more than owned"):
-        contract.sellLoanFraction(loan_id, 1, 200, {"from": lender})
+    loan_id = contract.getMarketItemIds()[0]
+    with brownie.reverts("proposeLoanFraction: Cant sell more than owned"):
+        contract.proposeLoanFraction(loan_id, 1, 200, {"from": lender})
 
 
 def test_list_loan_fraction(contract, sell_loan_fraction):
-    fract_sale = contract.getLoanProposals()[0][8][0]
-    fract_for_sale = contract.fractionalSales(fract_sale)
-    assert fract_for_sale
-
-
-def test_list_loan_fraction_id(contract, sell_loan_fraction):
-    fract_sale = contract.getLoanProposals()[0][8][0]
-    loan_id = contract.getLoanProposals()[0][1]
-    fract_for_sale_loan_id = contract.fractionalSales(fract_sale)[0]
-    assert fract_for_sale_loan_id == loan_id
+    loan_id = contract.getMarketItemIds()[0]
+    fract_sale = contract.getMarketplaceItems(loan_id)[9][0]
+    assert fract_sale > 1
 
 
 def test_list_loan_fraction_price(contract, sell_loan_fraction):
-    fract_sale = contract.getLoanProposals()[0][8][0]
-    fract_for_sale_loan_price = contract.fractionalSales(fract_sale)[2]
-    assert fract_for_sale_loan_price == 1
+    loan_id = contract.getMarketItemIds()[0]
+    fract_sale_price = contract.getMarketplaceItems(loan_id)[10][0][1]
+    assert fract_sale_price == 1
 
 
 def test_list_loan_fraction_percent(contract, sell_loan_fraction):
-    fract_sale = contract.getLoanProposals()[0][8][0]
-    fract_for_sale_loan_percent = contract.fractionalSales(fract_sale)[3]
-    assert fract_for_sale_loan_percent == 50
+    loan_id = contract.getMarketItemIds()[0]
+    fract_sale_percent = contract.getMarketplaceItems(loan_id)[10][0][2]
+    assert fract_sale_percent == 50
 
 
 def test_list_loan_fraction_emitted_id(contract, sell_loan_fraction):
-    loan_id = contract.getLoanProposals()[0][1]
+    loan_id = contract.getMarketItemIds()[0]
     emitted_fraction_listing_id = sell_loan_fraction.events[0]['loanId']
     assert loan_id == emitted_fraction_listing_id
 

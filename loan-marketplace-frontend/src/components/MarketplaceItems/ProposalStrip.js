@@ -18,8 +18,6 @@ const ProposalStrip = ({ attributes }) => {
     alert("lend: Cannot lend to your own proposal");
   };
 
-  console.log(attributes);
-
   return (
     <>
       <section className="strip-container">
@@ -29,7 +27,7 @@ const ProposalStrip = ({ attributes }) => {
               <th>Proposed Amount</th>
               <th>Interest Rate</th>
               <th>Loan Duration</th>
-              <th>My Address</th>
+              <th>Address</th>
             </tr>
           </thead>
           <tbody>

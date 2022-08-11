@@ -6,3 +6,11 @@ This peer to peer lending platform gives borrowers an opportunity to propose loa
 ```
 git clone https://github.com/ForrestChew/loan_marketplace.git
 ```
+2) Install Eth-Brownie <br>
+https://pypi.org/project/eth-brownie/
+```
+pipx install eth-brownie
+```
+3) Create `.env` file
+If running the project locally (Ganache), skip this step. Otherwise, create a `.env` file in the root of project directory and add your private key. 
+4

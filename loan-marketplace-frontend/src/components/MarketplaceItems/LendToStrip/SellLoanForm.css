@@ -3,6 +3,7 @@
 }
 
 .input-box {
-  width: 50%;
+  width: 100%;
+  padding: 1px 1px 1px 1px;
   height: 2rem;
 }

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.9;
 
 contract LoanFactory {
     struct Item {
@@ -165,5 +165,21 @@ contract LoanFactory {
         itemIdToItem[_loanId].lenders.push(msg.sender);
         itemIdToItem[_loanId].percentOwned[_seller] -= fractSalePercent;
         itemIdToItem[_loanId].percentOwned[msg.sender] += fractSalePercent;
+    }
+
+    uint256[] store;
+
+    function add() public {
+        store.push(1);
+    }
+
+    function get(uint256 idx) public view returns (uint256) {
+        return store[idx];
+    }
+
+    function getter() public view {
+        for (uint256 i = 0; i < store.length; i++) {
+            get(store[i]);
+        }
     }
 }

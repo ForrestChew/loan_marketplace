@@ -1,11 +1,10 @@
 import pytest
 from brownie import LoanMarketplace,  accounts
-from scripts.deploy_contract import get_account
 
 
 @pytest.fixture()
 def contract():
-    owner = get_account()
+    owner = accounts[0]
     listing_fee = 1
     contract_instance = LoanMarketplace.deploy(owner, listing_fee, {"from": owner})
     return contract_instance

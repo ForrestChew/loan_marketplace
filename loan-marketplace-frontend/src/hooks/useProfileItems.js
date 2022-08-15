@@ -14,14 +14,7 @@ export const useProfileItems = () => {
   const [signerResellProposals, setSignerResellProposals] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      try {
-        await getSigner().getAddress();
-        buildProfileItems();
-      } catch (e) {
-        alert("Please Sign in with Metamask");
-      }
-    })();
+    buildProfileItems();
     // eslint-disable-next-line
   }, []);
 

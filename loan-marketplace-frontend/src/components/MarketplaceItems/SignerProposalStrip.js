@@ -2,7 +2,7 @@ import {
   getSigner,
   invokeDelistProposal,
 } from "../../contract-info/contract-interactions";
-import { hexToInt, formatEther } from "../../utils";
+import { hexToInt, formatEther, secondsToDays } from "../../utils";
 import "./Strip.css";
 
 const ProposalStrip = ({ attributes }) => {
@@ -34,7 +34,7 @@ const ProposalStrip = ({ attributes }) => {
             <tr>
               <td>{formatEther(loanAmount)}</td>
               <td>{hexToInt(interestRate)}%</td>
-              <td>{hexToInt(loanDuration)} Days</td>
+              <td>{hexToInt(secondsToDays(loanDuration))} Days</td>
               <td>{borrower} </td>
             </tr>
           </tbody>
